@@ -1,0 +1,38 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <title>Códigos de Steam</title>
+
+  <script type="text/javascript">
+    function cargarCodigos() {
+      var url = "https://TU-SERVIDOR/codigos.json"; // reemplazar
+
+      fetch(url)
+        .then(response => response.json())
+        .then(data => {
+          var contenedor = document.getElementById("lista");
+          contenedor.innerHTML = "";
+
+          data.codigos.forEach(function(codigo, i) {
+            contenedor.innerHTML += "<li><b>Código " + (i+1) + ":</b> " + codigo + "</li>";
+          });
+        })
+        .catch(err => {
+          document.getElementById("lista").innerHTML = "<li>Error cargando códigos</li>";
+        });
+    }
+  </script>
+</head>
+
+<body onload="cargarCodigos()">
+
+  <h2>Códigos de Steam actualizados cada 24 horas</h2>
+
+  <ul id="lista">
+    <li>Cargando códigos...</li>
+  </ul>
+
+</body>
+</html>
